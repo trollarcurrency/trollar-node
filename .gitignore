@@ -38,6 +38,12 @@ slow_test
 !slow_test/
 nano_rpc
 !nano_rpc/
+troll_node
+!troll_node/
+troll_wallet
+!troll_wallet/
+troll_rpc
+!troll_rpc/
 
 # IDEs
 .idea

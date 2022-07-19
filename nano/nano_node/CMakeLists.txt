@@ -1,7 +1,7 @@
-add_executable(nano_node daemon.cpp daemon.hpp entry.cpp)
+add_executable(troll_node daemon.cpp daemon.hpp entry.cpp)
 
 target_link_libraries(
-  nano_node
+  troll_node
   node
   rpc
   secure
@@ -10,29 +10,29 @@ target_link_libraries(
   ${PLATFORM_LIBS})
 
 if(NANO_STACKTRACE_BACKTRACE)
-  target_link_libraries(nano_node backtrace)
+  target_link_libraries(troll_node backtrace)
 endif()
 
 target_compile_definitions(
-  nano_node PRIVATE -DTAG_VERSION_STRING=${TAG_VERSION_STRING}
+  troll_node PRIVATE -DTAG_VERSION_STRING=${TAG_VERSION_STRING}
                     -DGIT_COMMIT_HASH=${GIT_COMMIT_HASH})
 
 set_target_properties(
-  nano_node PROPERTIES COMPILE_FLAGS
+  troll_node PROPERTIES COMPILE_FLAGS
                        "-DQT_NO_KEYWORDS -DBOOST_ASIO_HAS_STD_ARRAY=1")
 
 add_custom_command(
-  TARGET nano_node
+  TARGET troll_node
   POST_BUILD
-  COMMAND nano_node --generate_config node >
+  COMMAND troll_node --generate_config node >
           ${PROJECT_BINARY_DIR}/config-node.toml.sample
-  COMMAND nano_node --generate_config rpc >
+  COMMAND troll_node --generate_config rpc >
           ${PROJECT_BINARY_DIR}/config-rpc.toml.sample)
 
 if((NANO_GUI OR RAIBLOCKS_GUI) AND NOT APPLE)
   if(WIN32)
-    install(TARGETS nano_node RUNTIME DESTINATION .)
+    install(TARGETS troll_node RUNTIME DESTINATION .)
   else()
-    install(TARGETS nano_node RUNTIME DESTINATION ./bin)
+    install(TARGETS troll_node RUNTIME DESTINATION ./bin)
   endif()
 endif()

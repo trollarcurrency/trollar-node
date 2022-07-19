@@ -286,8 +286,8 @@ int main (int argc, char * const * argv)
 		("send_count,s", boost::program_options::value<int> ()->default_value (2000), "How many send blocks to generate")
 		("simultaneous_process_calls", boost::program_options::value<int> ()->default_value (20), "Number of simultaneous rpc sends to do")
 		("destination_count", boost::program_options::value<int> ()->default_value (2), "How many destination accounts to choose between")
-		("node_path", boost::program_options::value<std::string> (), "The path to the nano_node to test")
-		("rpc_path", boost::program_options::value<std::string> (), "The path to the nano_rpc to test");
+		("node_path", boost::program_options::value<std::string> (), "The path to the troll_node to test")
+		("rpc_path", boost::program_options::value<std::string> (), "The path to the troll_rpc to test");
 	// clang-format on
 
 	boost::program_options::variables_map vm;
@@ -318,7 +318,7 @@ int main (int argc, char * const * argv)
 	}
 	else
 	{
-		auto node_filepath = running_executable_filepath.parent_path () / "nano_node";
+		auto node_filepath = running_executable_filepath.parent_path () / "troll_node";
 		if (running_executable_filepath.has_extension ())
 		{
 			node_filepath.replace_extension (running_executable_filepath.extension ());
@@ -327,7 +327,7 @@ int main (int argc, char * const * argv)
 	}
 	if (!boost::filesystem::exists (node_path))
 	{
-		std::cerr << "nano_node executable could not be found in " << node_path << std::endl;
+		std::cerr << "troll_node executable could not be found in " << node_path << std::endl;
 		return 1;
 	}
 
@@ -339,7 +339,7 @@ int main (int argc, char * const * argv)
 	}
 	else
 	{
-		auto rpc_filepath = running_executable_filepath.parent_path () / "nano_rpc";
+		auto rpc_filepath = running_executable_filepath.parent_path () / "troll_rpc";
 		if (running_executable_filepath.has_extension ())
 		{
 			rpc_filepath.replace_extension (running_executable_filepath.extension ());
@@ -348,7 +348,7 @@ int main (int argc, char * const * argv)
 	}
 	if (!boost::filesystem::exists (rpc_path))
 	{
-		std::cerr << "nano_rpc executable could not be found in " << rpc_path << std::endl;
+		std::cerr << "troll_rpc executable could not be found in " << rpc_path << std::endl;
 		return 1;
 	}
 
